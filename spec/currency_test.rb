@@ -1,41 +1,21 @@
-require 'minitest/autorun'
-require 'minitest/pride'
 
+($1 == :usd)
+0.76 == :gbp == $1
 
-require_relative '../lib/currency.rb'
+118.89 /0.76 ==
 
+.76 gbp
 
-class CurrencyTest < Minitest::Test
-
-  def test_currency_exists
-    assert(Currency)
-  end
-
-  def test_codes_exists
-    c = Currency.new
-    assert_respond_to(c, :codes)
-  end
-
-  def test_codes_returns_empty_hash_for_zero
-    c = Currency.new
-    country_codes = Hash.new
-    assert_equal({}, country_codes)
-  end
-
-  def test_codes_hash_literals
-    country_codes = {:yen=>118.89, :usd=>1, :gbp=>0.76, :ruble=>68.49, :peso=>16.94}
-    assert_equal 5, country_codes.length
-  end
-  # def test_codes_returns_hash_codes
-  #    c = Currency.new
-  #    assert_equal({:yen=>118.89, :usd=>1, :gbp=>0.76, :ruble=>68.49, :peso=>16.94}, c.codes)
-  # end
+1 gbp + 3 gbp
 
 
 
+Currency objects:
 
-
-
-
-
-end
+1.done - Should be created with an amount and a currency code
+2.done - Should equal another Currency object with the same amount and currency code
+3.Should NOT equal another Currency object with different amount or currency code
+4.Should be able to be added to another Currency object with the same currency code
+5.Should be able to be subtracted by another Currency object with the same currency code
+6.Should raise a DifferentCurrencyCodeError when you try to add or subtract two Currency objects with different currency codes.
+7.Should be able to be multiplied by a Fixnum or Float and return a new Currency object

@@ -1,3 +1,6 @@
+class DifferentCurrencyCode < StandardError
+end
+
 class Currency
 
 attr_reader :amount_to_convert, :country_code  # => nil
@@ -7,10 +10,69 @@ attr_reader :amount_to_convert, :country_code  # => nil
     @country_code = country        # => "usd"
   end
 
-  def equal
-    obj1 = Currency.new(1, :usd)
-    obj2 = Currency.new(1, :usd)
-    obj1 == obj2
+  def ==(other)
+    if other.is_a? Currency
+      if other.country_code == self.country_code && other.amount_to_convert == self.amount_to_convert
+        true
+      else
+        return false
+      end
+    end
   end
 
+  def -(other)
+    if other.is_a? Currency
+      if other.country_code == self.country_code
+        new_amount = self.amount_to_convert - other.amount_to_convert
+        new_amount = 0 if new_amount < 0
+        Currency.new(new_amount, self.country_code)
+      else
+        raise DifferentCurrencyCode
+      end
+    end
+  end
+
+  def +(other)
+    if other.is_a? Currency
+      if other.country_code == self.country_code
+        new_amount = self.amount_to_convert + other.amount_to_convert
+        Currency.new(new_amount, self.country_code)
+      else
+        raise DifferentCurrencyCode
+      end
+    end
+  end
+
+  # def *(other)
+  #   if other.is_a? Currency
+  #     if other.amount_to_convert.is_a? Fixnum
+  #       new_amount = self.amount_to_convert * other.amount_to_convert
+  #       Currency.new(new_amount, self.country_code)
+  #     else
+  #       raise DifferentCurrencyCode
+  #     end
+  #   end
+  # end
+
+  # def *(other)
+  #   if other.is_a? Currency
+  #     if other.amount_to_convert.is_a? Float
+  #       new_amount = self.amount_to_convert * other.amount_to_convert
+  #       Currency.new(new_amount, self.country_code)
+  #     else
+  #       raise DifferentCurrencyCode
+  #     end
+  #   end
+  # end
+
+  def *(other)
+    if other.is_? Currency
+      if other.amount_to_convert.is_a Fixunum || Float
+        new_amount = self.amount_to_convert * other.amount_to_convert
+        Currency.new(new_amount, self.country_code)
+      else
+        raise DifferentCurrencyCode
+      end
+    end
+  end
 end

@@ -8,19 +8,29 @@ class CurrencyConverter
   country_codes = {:usd=>1, :gbp=>0.76}
   end
 
-  def convert
 
-Should be able to take a Currency object that has one currency code it
-knows and a requested currency code and return a new Currency object with
- the right amount in the new currency code. For example:
+  def convert(amount, country)
+    amount * country = known
 
-currency_converter.convert( Currency.new(10, :USD), :EUR ) == Currency.new(7.40, :EUR)
+    known * requested = new currency object
 
   end
 
 
+    # Should be able to take a Currency object that has one currency code it
+    # knows and a requested currency code and return a new Currency object with
+    # the right amount in the new currency code. For example:
+
 
 end
+
+# currency_converter = CurrencyConverter.new
+
+    # currency_converter.convert( Currency.new(10, :USD), :EUR ) == Currency.new(7.40, :EUR)
+currency_converter = CurrencyConverter.new
+known = currency_converter.convert( Currency.new(10, :USD)
+
+ currency_converter.convert(known, :EUR ) == Currency.new(7.40, :EUR)
 
 
 
